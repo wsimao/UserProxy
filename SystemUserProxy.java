@@ -1,21 +1,21 @@
-public class SystemUserProxy implements iSystemUser {
+public class SystemUserProxy implements Acess {
 
-    private AdminUser adminUser;
-    private String firstName;
-    private String userName;
+    private Acess user = new iSystemUser();
 
-    public SystemUserProxy(String firstName, String userName) {
-        this.firstName = firstName;
-        this.userName = userName;
-    }
 
     @Override
-    public void exibirInfo() {
-        if(adminUser == null) {
-            adminUser = new AdminUser(firstName, userName);
-        }
-        adminUser.exibirInfo();
-        
+    public boolean acess(Credential credential) {
+        if(!acessExpired(credential)) {
+        return true;
     }
+    return user.acess(credential);
+}
+
+    @Override
+    public boolean acessExpired(Credential credential) {
+        return user.acessExpired(credential);
+    }
+
+
 }
     
